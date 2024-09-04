@@ -1,0 +1,56 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.height-full{height: 100vh;}
+::-webkit-scrollbar {width: 8px;}
+::-webkit-scrollbar-track {background: #f1f1f1; }
+::-webkit-scrollbar-thumb {background: #f1f1f1; }
+::-webkit-scrollbar-thumb:hover { background: #f1f1f1; }
+.flex-005{flex: 0.05;}
+
+.contact-box,.flex-03{flex: 0.3;}
+.content-box,.flex-065{flex: 0.65;}
+.flex-035{flex: 0.35;}
+.flex-01{flex: 0.1;}
+.flex-08{flex: 0.8;}
+.flex-1{flex: 1;}
+
+.border-bottom{
+    border-bottom: 2px solid black;
+}
+.rounded-icon{
+    border-radius: 50%;
+    padding: 5px 25px;
+}
+#sentIcon{
+    width: 100%;
+    height: 100%;
+}
+#seenIcon{
+    width: 100%;
+    height: 100%;
+    color: blue;
+}
+.box-shadow-1{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.box-shadow-2{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.light{
+    background-color: rgb(229 231 235);
+    color: black;
+    transition: background-color 1s;
+}
+.dark{
+    background-color: #000000;
+    color: white;
+    transition: background-color 1s;
+}
+.App{
+    cursor: url('./assets/cursor.png'), auto;
+}
+/* .hover-pointer:hover{
+    cursor: url('./assets/pointer.jpg'),auto;
+} */
