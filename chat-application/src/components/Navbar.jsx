@@ -15,13 +15,18 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 function Navbar() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [isLightMode, setLightMode] = useState(true);
-
   const [open, setOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   
   const handleClickOpen = () => { setOpen(true); };
   const handleClose = () => { setOpen(false);};
@@ -34,6 +39,19 @@ function Navbar() {
       navigate('/');
     },1000);
   };
+  const handleAccountClickOpen = () => {
+    setAccountOpen(true);
+  };
+  const handleAccountClose = () => {
+    setAccountOpen(false);
+  };
+
+  const handleSettingsClickOpen = () => {
+    setSettingsOpen(true);
+  };
+  const handleSettingsClose = () => {
+    setSettingsOpen(false);
+  };
   return (
     <div
       className={`flex flex-col items-center gap-2 py-2 justify-between flex-005 rounded-md box-shadow-2 ${
@@ -44,7 +62,7 @@ function Navbar() {
         <CircularProgress color="inherit" />
       </Backdrop>
       <div className='flex flex-col gap-4 '>
-        <IconButton onClick={() => navigate('welcome')}>
+        <IconButton onClick={handleAccountClickOpen}>
           <UserAccountButton className={isLightMode ? 'light' : 'dark'} />
         </IconButton>
         <IconButton onClick={() => navigate('user')}>
@@ -76,6 +94,11 @@ function Navbar() {
               <Button onClick={handleClose}>No</Button>
               <Button onClick={handleLogout} autoFocus> Yes</Button>
             </DialogActions>
+          </Dialog>
+        )}
+        {accountOpen && (
+          <Dialog open={accountOpen} onClose={handleAccountClose} aria-labelledby="alert-dialog-title" aria-describedby = "alert-dialog-description">
+            <DialogTitle id="alert-dialog-title" className='font-serif'> {"This is your profile"} </DialogTitle>
           </Dialog>
         )}
       </div>

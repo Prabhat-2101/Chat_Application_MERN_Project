@@ -13,6 +13,7 @@ function UserItem({props}) {
     else if(status === "sent") icon = <SentIcon id="sentIcon"/>;
     else icon = <SeenIcon id="sentIcon"/>;
     const handleClick = () => {
+      console.log(props)
       navigate('chat', { state: { conversation: props } });
     };
     return (
