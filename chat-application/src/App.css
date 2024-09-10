@@ -54,3 +54,52 @@
 /* .hover-pointer:hover{
     cursor: url('./assets/pointer.jpg'),auto;
 } */
+
+
+.file-type-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease-in-out;
+}
+  
+  .file-type-dialog button {
+    margin: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  
+  .file-type-dialog button:hover {
+    background-color: #ccc;
+  }
+  .overlay {
+    position: absolute;
+    top: 40%;
+    left: auto;
+    margin: auto;
+    /* width: auto;
+    height: auto; */
+    display: none;
+    z-index: 1;
+  }
+  
+  .camera-overlay, .file-overlay {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .camera-overlay,.file-overlay {
+    background-size: 20px 20px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+  }
