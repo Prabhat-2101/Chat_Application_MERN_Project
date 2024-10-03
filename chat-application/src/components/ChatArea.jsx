@@ -17,7 +17,6 @@ import EmojiPicker from 'emoji-picker-react';
 function Workarea({props}) {
     const navigate = useNavigate();
     const location = useLocation();
-    const [conversation, setConversations] = useState(null);
     const [sender, setSender] = useState(JSON.parse(localStorage.getItem('userData')));
     const [reciever, setReciever] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -29,6 +28,7 @@ function Workarea({props}) {
     const [showFileTypeDialog, setShowFileTypeDialog] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [chatName,setChatName] = useState("");
+    const [lastSeen,setLastSeen] = useState("");
     
 
     const handleAttachmentClick = () => {
@@ -63,25 +63,26 @@ function Workarea({props}) {
     
     useEffect(() => {
         if (!location.state || !location.state.conversation.userList[0]) {
-        navigate('/app/welcome');
+            navigate('/app/welcome');
         } else {
             const fetchMessages = async () => {
-                try {
-                setConversations(location.state.conversation);
-                setReciever(location.state.conversation.userList[0]);
+            try {
+                setReciever(location.state.conversation.userList[0]); 
                 setChatName(location.state.conversation.chatName);
                 const response = await axios.get(`http://localhost:8000/user/chats/${sender._id}/${reciever}`);
                 const messageList = response.data;
                 messageList.sort((a, b) => a.createdAt - b.createdAt);
                 setMessageList(response.data);
+                const response2 = await axios.get(`http://localhost:8000/user/u/${reciever}`);
+                setLastSeen(response2.data.lastSeen);
             } catch (error) {
               console.error(error);
             }
         };
         fetchMessages();
-        setLoading(false);
+            setLoading(false);
         }
-    }, [location]);
+    }, [location]);  /* Rendering one step slower. We can use messageList in this field but it will call the function twice. */
 
     const handleInputChange = (event) => {
         const inputValue = event.target.value;
@@ -127,7 +128,15 @@ function Workarea({props}) {
             </div>
             <div className='w-11/12 flex flex-col'>
             <p>{chatName}</p>
-            <div className='text-xs'>{sender._id}</div>
+            <div className='text-xs'>Last seen at {new Date(lastSeen).toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit'
+                })} {new Date(lastSeen).toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit' 
+                })}
+            </div>
             </div>
             <div className='flex gap-4 items-center'>
                 <IconButton><VoiceCallButton/></IconButton>

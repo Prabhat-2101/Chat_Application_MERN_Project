@@ -63,14 +63,14 @@ const addUserController = expressAsyncHandler(async (req, res) => {
         return;
     }
     try {
-        const adminUser = await UserModal.findOne({ email: admin });
+        const adminUser = await UserModal.findOne({ email: admin.email });
         if (!adminUser) {
-            res.status(404).json({ message: "Admin user not found" });
+            res.status(404).json({ message: "Admin user not found",id:admin });
             return;
         }
         const user = await UserModal.findOne({ email: userList[0] });
         if (!user) {
-            res.status(404).json({ message: "User not found" });
+            res.status(404).json({ message: "User not found",id:userList[0] });
             return;
         }
         const existingChat = await ChatModal.findOne({
@@ -192,5 +192,20 @@ const fetchUserChatsController = expressAsyncHandler(async (req, res) => {
     }
   });
 
+const lastSeenController = async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const lastSeen = new Date().toISOString();
+        const user = await UserModal.findByIdAndUpdate(userId, { lastSeen }, { new: true });
+        if (user) {
+            res.status(200).send({ message: 'Logout successful' });
+        } else {
+            res.status(404).json({ success: false, message: 'User not found' });
+        }
+    } catch (error) {
+      console.error('Error updating last seen status:', error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+};
 
-module.exports = { addUserController,addGroupController, addMessageController,fetchUsersController,fetchUsersDetailsController,fetchUserChatsController }
+module.exports = { addUserController,addGroupController, addMessageController,fetchUsersController,fetchUsersDetailsController,fetchUserChatsController,lastSeenController }

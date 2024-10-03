@@ -49,7 +49,7 @@ function Contact() {
                 <input type="text" placeholder='Search' className='px-2 py-1 border-hidden border-bottom outline-none borde rounded-md font-serif w-11/12 bg-transparent' />
             </div>
             <div className='flex flex-col flex-1 w-full bg-gray-100 p-3 gap-5 rounded overflow-y-auto box-shadow-2'>
-                {conversations.map((conversation,index) => {
+                {conversations.sort((a, b) => new Date(b.lastSeen) - new Date(a.lastSeen)).map((conversation,index) => {
                     return <UserItem props={conversation}  key={index}/>
                 })}
             </div>

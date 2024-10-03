@@ -17,6 +17,10 @@ const user = mongoose.Schema({
     password:{
         type:String,
         required:true
+    },
+    lastSeen:{
+        type: Date,
+        default: Date.now()
     }
 });
 

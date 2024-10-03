@@ -13,7 +13,6 @@ function UserItem({props}) {
     else if(status === "sent") icon = <SentIcon id="sentIcon"/>;
     else icon = <SeenIcon id="sentIcon"/>;
     const handleClick = () => {
-      console.log(props)
       navigate('chat', { state: { conversation: props } });
     };
     return (
@@ -26,7 +25,16 @@ function UserItem({props}) {
         <div className='flex justify-between items-center p-1 text-xs'>
         <p><span className='inline-block w-4 h-4 mr-1'>{icon}  </span> {props.lastMsg}
         </p>
-        <p> Today</p>
+        <p>
+        {new Date(props.lastSeen).toLocaleTimeString('en-US', { 
+          hour: '2-digit', 
+          minute: '2-digit'
+        })} {new Date(props.lastSeen).toLocaleDateString('en-US', { 
+          year: 'numeric', 
+          month: '2-digit', 
+          day: '2-digit' 
+        })}
+        </p>
         </div>
         </div>
     </div>

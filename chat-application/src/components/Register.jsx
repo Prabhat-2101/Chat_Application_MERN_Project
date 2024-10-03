@@ -35,7 +35,7 @@ export default function Register() {
         console.log(responseData);
         localStorage.setItem('userData', JSON.stringify(responseData));
         setTimeout(()=>{
-          navigate('/login');
+          navigate('/');
         },1000);
       } else {
         setSigninStatus({ open: true, message: 'Failed to create account. Please try again.', severity: 'error' });

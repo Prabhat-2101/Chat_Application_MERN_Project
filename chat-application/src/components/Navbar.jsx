@@ -19,6 +19,8 @@ import DialogContent from '@mui/material/DialogContent';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import axios from 'axios';
+import socketIOClient from 'socket.io-client';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -27,16 +29,19 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  
+  const [sender, setSender] = useState(JSON.parse(localStorage.getItem('userData')));
   const handleClickOpen = () => { setOpen(true); };
   const handleClose = () => { setOpen(false);};
   const handleLogout = () => {
     handleClose();
     setLoading(true);
-    setTimeout(()=>{
+    setTimeout(async ()=>{
       setLoading(false);
-      localStorage.removeItem('userData');
-      navigate('/');
+      const updatedTime = await axios.post(`http://localhost:8000/user/logout`, { userId: sender._id });
+      if(updatedTime){
+        localStorage.removeItem('userData');
+        navigate('/');
+      }
     },1000);
   };
   const handleAccountClickOpen = () => {

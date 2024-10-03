@@ -21,7 +21,11 @@ const chat = mongoose.Schema({
     ],
     lastMsg:{
         type: String,
-        ref: "Message"
+        default: "Welcome to whatsapp"
+    },
+    lastSeen: {
+        type: Date,
+        default: Date.now()
     }
 },{timeStamp: true})
 

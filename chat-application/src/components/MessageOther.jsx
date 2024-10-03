@@ -18,9 +18,9 @@ function MessageOther(props) {
         <div className='text-md bg-blue-600 rounded-icon p-1 w-1/12 flex items-center justify-center'>
         <p>{sender[0]}</p>
         </div>
-        <div className='w-11/12 flex flex-col'>
+        <div className='w-11/12 flex flex-col '>
         {/* <p className='text-sm'>{sender}</p> */}
-        <div className='flex p-1 text-xs justify-between'>
+        <div className='flex p-1 text-xs justify-between flex-col gap-2'>
         {/* <span className='inline-block w-4 h-4 mr-1'>{icon}  </span>  */} {/* double tick */}
         <p>{content}</p>
         <p>{formattedDate}</p>
